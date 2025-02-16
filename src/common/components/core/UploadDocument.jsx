@@ -9,11 +9,16 @@ function UploadDocument(props) {
   const onDrop = useCallback(
     (acceptedFiles) => {
       const file = acceptedFiles[0];
-      // Validate file type (only images in this case, you can change this)
-      if (file && file.type.startsWith("image/")) {
+
+      if (
+        file &&
+        (file.type ===
+          "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" ||
+          file.type === "application/vnd.ms-excel")
+      ) {
         setUrl(file);
       } else {
-        toast.error("Please upload a valid image file.");
+        toast.error("Please upload a valid Excel file (.xlsx or .xls).");
         setUrl(null); // Clear file if invalid
       }
     },
@@ -25,7 +30,6 @@ function UploadDocument(props) {
   return (
     <div className="upload-document-container ">
       <label className="mb-2 text-sm font-semibold">{props.label}</label>
-
       <div
         {...getRootProps()}
         className="dropzone-area w-full  border-dashed border-2 border-gray-400 min-h-96 flex justify-center items-center my-2  rounded-lg"
@@ -33,12 +37,9 @@ function UploadDocument(props) {
         <input {...getInputProps()} />
         <div className={`dropzone-inner ${isDragActive ? "active" : ""}`}>
           {Url ? (
-            <img
-              className="object-cover w-full h-full"
-              src={URL.createObjectURL(Url)}
-            />
+            <p>{Url?.name}</p>
           ) : (
-            <p>{message ?? "Drag & drop an image here, or click to select."}</p>
+            <p>{message ?? "Drag & drop an file here, or click to select."}</p>
           )}
         </div>
       </div>

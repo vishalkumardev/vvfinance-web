@@ -15,6 +15,10 @@ const Clients = React.lazy(() => import("../../pages/admin/Clients"));
 const Loans = React.lazy(() => import("../../pages/admin/Loans"));
 const Telecall = React.lazy(() => import("../../pages/admin/Telecall"));
 const User = React.lazy(() => import("../../pages/admin/User"));
+const AddLoan = React.lazy(() => import("../../pages/admin/AddLoan"));
+const AddTelecall = React.lazy(() => import("../../pages/admin/AddTeleCall"));
+const AddUser = React.lazy(() => import("../../pages/admin/AddUser"));
+const AddClient = React.lazy(() => import("../../pages/admin/AddClient"));
 
 // Wrap with suspense
 
@@ -27,6 +31,10 @@ const LoansSuspense = useSuspense(Loans);
 const TelecallSuspense = useSuspense(Telecall);
 const NotFoundPageSuspense = useSuspense(NotFoundPage);
 const UserSuspense = useSuspense(User);
+const AddLoanSuspense = useSuspense(AddLoan);
+const AddTelecallSuspense = useSuspense(AddTelecall);
+const AddUserSuspense = useSuspense(AddUser);
+const AddClientSuspense = useSuspense(AddClient);
 
 export default function AuthRoute(isLoggedIn, role) {
   const routeObject = {
@@ -53,16 +61,32 @@ export default function AuthRoute(isLoggedIn, role) {
                     element: <ClientsSuspense />,
                   },
                   {
+                    path: "/admin/dashboard/clients/add",
+                    element: <AddClientSuspense />,
+                  },
+                  {
                     path: "/admin/dashboard/loans",
                     element: <LoansSuspense />,
+                  },
+                  {
+                    path: "/admin/dashboard/loans/add",
+                    element: <AddLoanSuspense />,
                   },
                   {
                     path: "/admin/dashboard/telecall",
                     element: <TelecallSuspense />,
                   },
                   {
+                    path: "/admin/dashboard/telecall/add",
+                    element: <AddTelecallSuspense />,
+                  },
+                  {
                     path: "/admin/dashboard/users",
                     element: <UserSuspense />,
+                  },
+                  {
+                    path: "/admin/dashboard/users/add",
+                    element: <AddUserSuspense />,
                   },
                 ],
               }),

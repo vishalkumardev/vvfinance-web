@@ -46,17 +46,9 @@ export const userApi = createApi({
       invalidatesTags: ["Users"], // Invalidate the "Users" tag to refetch data
     }),
 
-    approveuser: builder.mutation({
+    toggleUser: builder.mutation({
       query: (userId) => ({
-        url: `/user/approve/${userId}`,
-        method: "PATCH",
-      }),
-      invalidatesTags: ["Users"], // Invalidate the "Users" tag to refetch data
-    }),
-
-    rejectuser: builder.mutation({
-      query: (userId) => ({
-        url: `/user/reject/${userId}`,
+        url: `/user/toggle/${userId}`,
         method: "PATCH",
       }),
       invalidatesTags: ["Users"], // Invalidate the "Users" tag to refetch data
@@ -66,24 +58,13 @@ export const userApi = createApi({
       query: (userId) => `/user/${userId}`,
       providesTags: ["userById"], // Mark this query as providing the "userById" tag
     }),
-
-    enrolluser: builder.mutation({
-      query: (userId) => ({
-        url: "/user/enroll",
-        method: "POST",
-        body: { userId },
-      }),
-      invalidatesTags: ["userById"], // Invalidate the "userById" tag to refetch data
-    }),
   }),
 });
 
 export const {
   useGetUsersQuery,
   useGetuserByIdQuery,
-  useEnrolluserMutation,
   useUpdateuserMutation,
   useDeleteuserMutation,
-  useApproveuserMutation,
-  useRejectuserMutation,
+  useToggleUserMutation,
 } = userApi;

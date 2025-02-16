@@ -5,21 +5,15 @@ import Action from "@/common/components/Action";
 import Tables from "@/common/components/core/Table";
 import formateDate from "@/common/hooks/formateDate";
 import { CircleCheck, EyeIcon, Trash, XCircle } from "lucide-react";
-// import //   useApproveCourseMutation,
-// //   useDeleteCourseMutation,
-// //   useRejectCourseMutation,
-// "../api/courseApi";
 import Status from "@/common/components/Status";
 import { useSelector } from "react-redux";
+import { useDeleteLoanMutation } from "../api/loanApi";
 
 function LoanTable({ loans, isLoading }) {
   const { role } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  //   // Mutations and their loading states
-  //   const [approveCourse] = useApproveCourseMutation();
-  //   const [rejectCourse] = useRejectCourseMutation();
-  //   const [deleteCourse] = useDeleteCourseMutation();
+  const [deleteLoan] = useDeleteLoanMutation();
 
   // Table headers
   const tableHeaders = useMemo(
@@ -39,38 +33,18 @@ function LoanTable({ loans, isLoading }) {
     []
   );
 
-  // Action configurations
   const actions = [
-    {
-      label: "View",
-      icon: <EyeIcon />,
-      //   onClick: (courseId) =>
-      //     navigate(`/${role}/dashboard/course/view/${courseId}`),
-      className: "",
-    },
-    {
-      label: "Approve",
-      icon: <CircleCheck />,
-      //   onClick: approveCourse,
-      className: "text-green-600 hover:text-green-500",
-    },
-    {
-      label: "Reject",
-      icon: <XCircle />,
-      //   onClick: rejectCourse,
-      className: "text-red-600 hover:text-red-500",
-    },
     {
       label: "Delete",
       icon: <Trash />,
-      //   onClick: deleteCourse,
+      onClick: deleteLoan,
       className: "text-gray-600 hover:text-gray-500",
     },
   ];
 
   // Table row component
   const tableRow = ({ row, index }) => (
-    <TableRow hover role="checkbox" tabIndex={-1} key={row?.courseId}>
+    <TableRow hover role="checkbox" tabIndex={-1} key={row?.loanId}>
       <TableCell>{index + 1}</TableCell>
       <TableCell>{row?.registration_no}</TableCell>
       <TableCell>{row?.customer}</TableCell>
@@ -82,7 +56,7 @@ function LoanTable({ loans, isLoading }) {
       <TableCell>{row?.address}</TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
-        <Action actions={actions} id={row?.courseId} />
+        <Action actions={actions} id={row?.loanId} />
       </TableCell>
     </TableRow>
   );

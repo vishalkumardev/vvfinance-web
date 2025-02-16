@@ -5,11 +5,13 @@ import { setPage, setSearch } from "../../features/telecall/slice/teleSlice";
 import { useTeleParams } from "../../features/telecall/hooks/useTeleParams";
 import LoanTable from "../../features/telecall/components/Table";
 import Pagination from "@/common/components/Pagination";
-import SearchBar from "../../common/components/SearchBar";
+import TopHeader from "../../common/components/TopHeader";
+import { useNavigate } from "react-router-dom";
 
 const Telecall = () => {
   const dispatch = useDispatch();
   const { search, filter, sort, page } = useTeleParams();
+  const navigate = useNavigate();
 
   const { data: telecallData, isLoading } = useGetTelecallQuery({
     search,
@@ -23,10 +25,17 @@ const Telecall = () => {
 
   return (
     <div className="px-5">
-      <SearchBar
+      <TopHeader
+        title="Loans"
+        placeholder="Search Loans..."
+        description="You can view loan and details here"
+        btn1Text="Upload Data"
+        btn1Visible={true}
+        btn1Fn={() => navigate("/admin/dashboard/telecall/add")}
+        btn2Text="Add Filter"
         handleSearch={(query) => dispatch(setSearch(query))}
-        placeholder="Search Telecall..."
       />
+
       <LoanTable telecalls={telecalls} isLoading={isLoading} />
       <Pagination
         totalPages={totalPages}

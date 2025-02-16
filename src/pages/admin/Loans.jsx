@@ -31,7 +31,7 @@ const Loans = () => {
         description="You can view  vehicle loan and details here"
         btn1Text="Upload Data"
         btn1Visible={true}
-        btn2Fn={() => navigate("/admin/dashboard/loan/add")}
+        btn1Fn={() => navigate("/admin/dashboard/loans/add")}
         btn2Text="Add Filter"
         handleSearch={(query) => dispatch(setSearch(query))}
       />

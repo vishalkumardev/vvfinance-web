@@ -3,11 +3,13 @@ import { TableCell, TableRow } from "@/common/components/ui/table";
 import Action from "@/common/components/Action";
 import Tables from "@/common/components/core/Table";
 import formateDate from "@/common/hooks/formateDate";
-import { useDeleteuserMutation } from "../api/userApi";
+import { useDeleteuserMutation, useToggleUserMutation } from "../api/userApi";
 import { Trash } from "lucide-react";
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
 
 function CourseTable({ users, isLoading }) {
   const [deleteuser] = useDeleteuserMutation();
+  const [toggleUser] = useToggleUserMutation();
 
   // Table headers
   const tableHeaders = useMemo(
@@ -16,6 +18,7 @@ function CourseTable({ users, isLoading }) {
       { name: "Name", id: "name" },
       { name: "Email", id: "email" },
       { name: "Role", id: "role" },
+      { name: "Status", id: "active" },
       { name: "Created At", id: "createdAt" },
       { name: "Action", id: "action" },
     ],
@@ -23,25 +26,12 @@ function CourseTable({ users, isLoading }) {
   );
 
   const actions = [
-    // {
-    //   label: "View",
-    //   icon: <EyeIcon />,
-    //   onClick: (courseId) =>
-    //     navigate(`/${role}/dashboard/course/view/${courseId}`),
-    //   className: "",
-    // },
-    // {
-    //   label: "Approve",
-    //   icon: <CircleCheck />,
-    //   onClick: approveCourse,
-    //   className: "text-green-600 hover:text-green-500",
-    // },
-    // {
-    //   label: "Reject",
-    //   icon: <XCircle />,
-    //   onClick: rejectCourse,
-    //   className: "text-red-600 hover:text-red-500",
-    // },
+    {
+      label: "Change Status",
+      icon: <ExclamationTriangleIcon />,
+      onClick: toggleUser,
+      className: "text-gray-600 hover:text-red-500",
+    },
     {
       label: "Delete",
       icon: <Trash />,
@@ -52,11 +42,14 @@ function CourseTable({ users, isLoading }) {
 
   // Table row component
   const tableRow = ({ row, index }) => (
-    <TableRow hover role="checkbox" tabIndex={-1} key={row?.courseId}>
+    <TableRow hover role="checkbox" tabIndex={-1} key={row?.userId}>
       <TableCell>{index + 1}</TableCell>
       <TableCell>{row?.name}</TableCell>
       <TableCell>{row?.email}</TableCell>
       <TableCell className="uppercase">{row?.role}</TableCell>
+      <TableCell className="uppercase">
+        {row?.active ? "Active" : "Inactive"}
+      </TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
         <Action actions={actions} id={row?.userId} />

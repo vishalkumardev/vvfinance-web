@@ -5,21 +5,14 @@ import Action from "@/common/components/Action";
 import Tables from "@/common/components/core/Table";
 import formateDate from "@/common/hooks/formateDate";
 import { CircleCheck, EyeIcon, Trash, XCircle } from "lucide-react";
-// import //   useApproveCourseMutation,
-// //   useDeleteCourseMutation,
-// //   useRejectCourseMutation,
-// "../api/courseApi";
 import Status from "@/common/components/Status";
 import { useSelector } from "react-redux";
+import { useDeleteTellecallMutation } from "../api/teleCallApi";
 
 function LoanTable({ telecalls, isLoading }) {
   const { role } = useSelector((state) => state.auth);
+  const [deleteTellecall] = useDeleteTellecallMutation();
   const navigate = useNavigate();
-
-  //   // Mutations and their loading states
-  //   const [approveCourse] = useApproveCourseMutation();
-  //   const [rejectCourse] = useRejectCourseMutation();
-  //   const [deleteCourse] = useDeleteCourseMutation();
 
   // Table headers
   const tableHeaders = useMemo(
@@ -42,36 +35,36 @@ function LoanTable({ telecalls, isLoading }) {
 
   // Action configurations
   const actions = [
-    {
-      label: "View",
-      icon: <EyeIcon />,
-      //   onClick: (courseId) =>
-      //     navigate(`/${role}/dashboard/course/view/${courseId}`),
-      className: "",
-    },
-    {
-      label: "Approve",
-      icon: <CircleCheck />,
-      //   onClick: approveCourse,
-      className: "text-green-600 hover:text-green-500",
-    },
-    {
-      label: "Reject",
-      icon: <XCircle />,
-      //   onClick: rejectCourse,
-      className: "text-red-600 hover:text-red-500",
-    },
+    // {
+    //   label: "View",
+    //   icon: <EyeIcon />,
+    //   //   onClick: (teleCallId) =>
+    //   //     navigate(`/${role}/dashboard/course/view/${teleCallId}`),
+    //   className: "",
+    // },
+    // {
+    //   label: "Approve",
+    //   icon: <CircleCheck />,
+    //   //   onClick: approveCourse,
+    //   className: "text-green-600 hover:text-green-500",
+    // },
+    // {
+    //   label: "Reject",
+    //   icon: <XCircle />,
+    //   //   onClick: rejectCourse,
+    //   className: "text-red-600 hover:text-red-500",
+    // },
     {
       label: "Delete",
       icon: <Trash />,
-      //   onClick: deleteCourse,
+      onClick: deleteTellecall,
       className: "text-gray-600 hover:text-gray-500",
     },
   ];
 
   // Table row component
   const tableRow = ({ row, index }) => (
-    <TableRow hover role="checkbox" tabIndex={-1} key={row?.courseId}>
+    <TableRow hover role="checkbox" tabIndex={-1} key={row?.teleCallId}>
       <TableCell>{index + 1}</TableCell>
       <TableCell>{row?.accountNo}</TableCell>
       <TableCell>{row?.borrowerName}</TableCell>
@@ -84,7 +77,7 @@ function LoanTable({ telecalls, isLoading }) {
       <TableCell>{row?.status}</TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
-        <Action actions={actions} id={row?.courseId} />
+        <Action actions={actions} id={row?.teleCallId} />
       </TableCell>
     </TableRow>
   );

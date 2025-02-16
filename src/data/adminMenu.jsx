@@ -37,23 +37,23 @@ const adminMenu = [
     path: "/admin/dashboard/telecall",
     icon: <Phone size={24} />,
   },
-  {
-    id: 5,
-    label: "Reports",
-    path: "/admin/dashboard/reports",
-    icon: <ChartNoAxesCombined size={24} />,
-  },
+  // {
+  //   id: 5,
+  //   label: "Reports",
+  //   path: "/admin/dashboard/reports",
+  //   icon: <ChartNoAxesCombined size={24} />,
+  // },
+  // {
+  //   id: 12,
+  //   label: "Notifications",
+  //   path: "/admin/dashboard/notifications",
+  //   icon: <Bell size={24} />,
+  // },
   {
     id: 6,
     label: "Users",
     path: "/admin/dashboard/users",
     icon: <Users size={24} />,
-  },
-  {
-    id: 12,
-    label: "Notifications",
-    path: "/admin/dashboard/notifications",
-    icon: <Bell size={24} />,
   },
 ];
 
