@@ -12,7 +12,7 @@ import { CircleCheck, EyeIcon, Trash, XCircle } from "lucide-react";
 import Status from "@/common/components/Status";
 import { useSelector } from "react-redux";
 
-function ClientTable({ clients, isLoading }) {
+function LoanTable({ loans, isLoading }) {
   const { role } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -24,11 +24,17 @@ function ClientTable({ clients, isLoading }) {
   // Table headers
   const tableHeaders = useMemo(
     () => [
-      { name: "Serial No.", id: "serial" },
-      { name: "Name", id: "name" },
-      { name: "Key", id: "key" },
-      { name: "Created At", id: "createdAt" },
-      { name: "Action", id: "action" },
+      { name: "Serial No." },
+      { name: "Registration No." },
+      { name: "Cust. Name" },
+      { name: "Brand" },
+      { name: "Emi" },
+      { name: "Pos" },
+      { name: "Chasis No." },
+      { name: "Engine No." },
+      { name: "Address" },
+      { name: "Created At" },
+      { name: "Action" },
     ],
     []
   );
@@ -66,10 +72,14 @@ function ClientTable({ clients, isLoading }) {
   const tableRow = ({ row, index }) => (
     <TableRow hover role="checkbox" tabIndex={-1} key={row?.courseId}>
       <TableCell>{index + 1}</TableCell>
-      <TableCell>{row?.name}</TableCell>
-      <TableCell>
-        <Status status={row?.key} />
-      </TableCell>
+      <TableCell>{row?.registration_no}</TableCell>
+      <TableCell>{row?.customer}</TableCell>
+      <TableCell>{row?.productname}</TableCell>
+      <TableCell>{row?.emi_amt}</TableCell>
+      <TableCell>{row?.total_due}</TableCell>
+      <TableCell>{row?.chasisnum}</TableCell>
+      <TableCell>{row?.enginenum}</TableCell>
+      <TableCell>{row?.address}</TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
         <Action actions={actions} id={row?.courseId} />
@@ -80,7 +90,7 @@ function ClientTable({ clients, isLoading }) {
   return (
     <Tables
       extra={{
-        rows: clients,
+        rows: loans,
         columns: tableHeaders,
         RowComponent: tableRow,
         isLoading,
@@ -89,4 +99,4 @@ function ClientTable({ clients, isLoading }) {
   );
 }
 
-export default ClientTable;
+export default LoanTable;

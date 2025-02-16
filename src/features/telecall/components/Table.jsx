@@ -12,7 +12,7 @@ import { CircleCheck, EyeIcon, Trash, XCircle } from "lucide-react";
 import Status from "@/common/components/Status";
 import { useSelector } from "react-redux";
 
-function ClientTable({ clients, isLoading }) {
+function LoanTable({ telecalls, isLoading }) {
   const { role } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
@@ -24,11 +24,18 @@ function ClientTable({ clients, isLoading }) {
   // Table headers
   const tableHeaders = useMemo(
     () => [
-      { name: "Serial No.", id: "serial" },
-      { name: "Name", id: "name" },
-      { name: "Key", id: "key" },
-      { name: "Created At", id: "createdAt" },
-      { name: "Action", id: "action" },
+      { name: "Serial No." },
+      { name: "Registration No." },
+      { name: "Cust. Name" },
+      { name: "Mobile Number" },
+      { name: "Lender" },
+      { name: "Emi" },
+      { name: "Pos" },
+      { name: "City" },
+      { name: "District" },
+      { name: "SARFAESI STATUS" },
+      { name: "Created At" },
+      { name: "Action" },
     ],
     []
   );
@@ -66,10 +73,15 @@ function ClientTable({ clients, isLoading }) {
   const tableRow = ({ row, index }) => (
     <TableRow hover role="checkbox" tabIndex={-1} key={row?.courseId}>
       <TableCell>{index + 1}</TableCell>
-      <TableCell>{row?.name}</TableCell>
-      <TableCell>
-        <Status status={row?.key} />
-      </TableCell>
+      <TableCell>{row?.accountNo}</TableCell>
+      <TableCell>{row?.borrowerName}</TableCell>
+      <TableCell>{row?.mobileNumber}</TableCell>
+      <TableCell>{row?.lender}</TableCell>
+      <TableCell> ₹ {row?.emiAmount}</TableCell>
+      <TableCell> ₹ {row?.principal}</TableCell>
+      <TableCell>{row?.city}</TableCell>
+      <TableCell>{row?.district}</TableCell>
+      <TableCell>{row?.status}</TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
         <Action actions={actions} id={row?.courseId} />
@@ -80,7 +92,7 @@ function ClientTable({ clients, isLoading }) {
   return (
     <Tables
       extra={{
-        rows: clients,
+        rows: telecalls,
         columns: tableHeaders,
         RowComponent: tableRow,
         isLoading,
@@ -89,4 +101,4 @@ function ClientTable({ clients, isLoading }) {
   );
 }
 
-export default ClientTable;
+export default LoanTable;

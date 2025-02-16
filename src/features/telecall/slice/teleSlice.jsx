@@ -8,8 +8,8 @@ const initialState = {
   totalPages: 1,
 };
 
-const categorySlice = createSlice({
-  name: "categorys",
+const teleCallSlice = createSlice({
+  name: "teleCalls",
   initialState,
   reducers: {
     setSearch(state, action) {
@@ -31,6 +31,6 @@ const categorySlice = createSlice({
 });
 
 export const { setSearch, setFilter, setSort, setPage, setTotalPages } =
-  categorySlice.actions;
+  teleCallSlice.actions;
 
-export default categorySlice.reducer;
+export default teleCallSlice.reducer;

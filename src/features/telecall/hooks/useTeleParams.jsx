@@ -1,12 +1,12 @@
 import { useSearchParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch, setFilter, setSort, setPage } from "../slice/categorySlice";
+import { setSearch, setFilter, setSort, setPage } from "../slice/teleSlice";
 import { useEffect } from "react";
 
-export const useCategoryParams = () => {
+export const useTeleParams = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
-  const { search, filter, sort, page } = useSelector((state) => state.category);
+  const { search, filter, sort, page } = useSelector((state) => state.telecall);
 
   useEffect(() => {
     const urlSearch = searchParams.get("search") || "";

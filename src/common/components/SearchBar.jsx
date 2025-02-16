@@ -25,7 +25,7 @@ export default function SearchBar({ handleSearch, placeholder }) {
     <TextInput
       type="text"
       placeholder={placeholder}
-      className="my-5 border py-2 w-3/12 px-5 text-sm "
+      className="border py-2 px-5 text-sm w-full"
       value={query}
       onChange={handleInputChange}
     />
