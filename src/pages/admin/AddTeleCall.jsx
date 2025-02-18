@@ -29,7 +29,7 @@ const AddTeleCall = () => {
 
           if (success) {
             resetForm();
-            navigate(`/admin/dashboard/telecall`);
+            navigate(`/dashboard/telecall`);
           }
         } catch (e) {
           console.log(e);

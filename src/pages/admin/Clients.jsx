@@ -31,7 +31,7 @@ const Course = () => {
         description="You can view Clients and their details here"
         btn1Text="Add New Client"
         btn1Visible={true}
-        btn1Fn={() => navigate("/admin/dashboard/clients/add")}
+        btn1Fn={() => navigate("/dashboard/clients/add")}
         btn2Text="Add Filter"
         handleSearch={(query) => dispatch(setSearch(query))}
       />

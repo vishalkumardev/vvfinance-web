@@ -51,7 +51,7 @@ const RegisterUser = () => {
 
         if (success) {
           resetForm();
-          navigate(`/admin/dashboard/users`);
+          navigate(`/dashboard/users`);
         }
       } catch (error) {
         console.error("Registration failed:", error);

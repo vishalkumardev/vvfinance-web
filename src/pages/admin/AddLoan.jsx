@@ -28,7 +28,7 @@ const AddLoan = () => {
 
           if (success) {
             resetForm();
-            navigate(`/admin/dashboard/loans`);
+            navigate(`/dashboard/loans`);
           }
         } catch (e) {
           console.log(e);

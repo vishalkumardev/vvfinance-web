@@ -35,7 +35,7 @@ const AddClient = () => {
 
         if (success) {
           resetForm();
-          navigate(`/admin/dashboard/clients`);
+          navigate(`/dashboard/clients`);
         }
       } catch (error) {
         console.error("Failed to add client:", error);

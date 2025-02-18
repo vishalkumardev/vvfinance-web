@@ -31,7 +31,7 @@ const Telecall = () => {
         description="You can view loan and details here"
         btn1Text="Upload Data"
         btn1Visible={true}
-        btn1Fn={() => navigate("/admin/dashboard/telecall/add")}
+        btn1Fn={() => navigate("/dashboard/telecall/add")}
         btn2Text="Add Filter"
         handleSearch={(query) => dispatch(setSearch(query))}
       />
