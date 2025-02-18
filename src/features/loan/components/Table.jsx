@@ -35,10 +35,16 @@ function LoanTable({ loans, isLoading }) {
 
   const actions = [
     {
+      label: "View",
+      icon: <EyeIcon />,
+      onClick: (loanId) => navigate(`/dashboard/loans/view/${loanId}`),
+      className: "text-gray-600 hover:text-gray-500",
+    },
+    {
       label: "Delete",
       icon: <Trash />,
       onClick: deleteLoan,
-      className: "text-gray-600 hover:text-gray-500",
+      className: "text-red-500 hover:text-red-600",
     },
   ];
 

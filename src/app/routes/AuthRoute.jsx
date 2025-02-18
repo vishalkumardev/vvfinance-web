@@ -19,6 +19,10 @@ const AddLoan = React.lazy(() => import("../../pages/admin/AddLoan"));
 const AddTelecall = React.lazy(() => import("../../pages/admin/AddTeleCall"));
 const AddUser = React.lazy(() => import("../../pages/admin/AddUser"));
 const AddClient = React.lazy(() => import("../../pages/admin/AddClient"));
+const ViewLoan = React.lazy(() => import("../../pages/admin/ViewLoan"));
+const SearchVehicle = React.lazy(() =>
+  import("../../pages/admin/SearchVehicle")
+);
 
 // Wrap with suspense
 
@@ -35,6 +39,8 @@ const AddLoanSuspense = useSuspense(AddLoan);
 const AddTelecallSuspense = useSuspense(AddTelecall);
 const AddUserSuspense = useSuspense(AddUser);
 const AddClientSuspense = useSuspense(AddClient);
+const ViewLoanSuspense = useSuspense(ViewLoan);
+const SearchVehicleSuspense = useSuspense(SearchVehicle);
 
 export default function AuthRoute(isLoggedIn, role) {
   const routeObject = {
@@ -50,43 +56,55 @@ export default function AuthRoute(isLoggedIn, role) {
           ? [
               AdminRoute({
                 ...routeObject,
-                path: "/admin",
+                path: "/",
                 children: [
                   {
-                    path: "/admin/dashboard",
+                    path: "/dashboard",
                     element: <AdminDashboardSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/clients",
+                    path: "/dashboard/clients",
                     element: <ClientsSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/clients/add",
+                    path: "/dashboard/clients/add",
                     element: <AddClientSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/loans",
+                    path: "/dashboard/loans",
                     element: <LoansSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/loans/add",
+                    path: "/dashboard/loans/add",
                     element: <AddLoanSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/telecall",
+                    path: "/dashboard/loans/view/:loanId",
+                    element: <ViewLoanSuspense />,
+                  },
+                  {
+                    path: "/dashboard/telecall",
                     element: <TelecallSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/telecall/add",
+                    path: "/dashboard/telecall/add",
                     element: <AddTelecallSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/users",
+                    path: "/dashboard/users",
                     element: <UserSuspense />,
                   },
                   {
-                    path: "/admin/dashboard/users/add",
+                    path: "/dashboard/users/add",
                     element: <AddUserSuspense />,
+                  },
+                  {
+                    path: "/dashboard/users/add",
+                    element: <AddUserSuspense />,
+                  },
+                  {
+                    path: "/dashboard/reports",
+                    element: <SearchVehicleSuspense />,
                   },
                 ],
               }),

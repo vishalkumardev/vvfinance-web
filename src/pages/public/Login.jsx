@@ -41,7 +41,7 @@ const Login = () => {
 
         if (success) {
           resetForm();
-          navigate(`/${data?.role}/dashboard`);
+          navigate(`/dashboard`);
         }
       } catch (error) {
         console.error("Error during login:", error);
