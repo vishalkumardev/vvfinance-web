@@ -31,7 +31,7 @@ const User = () => {
         description="You can view user and their details here"
         btn1Text="Add User"
         btn1Visible={true}
-        btn1Fn={() => navigate("/admin/dashboard/users/add")}
+        btn1Fn={() => navigate("/dashboard/users/add")}
         btn2Text="Add Filter"
         handleSearch={(query) => dispatch(setSearch(query))}
       />
