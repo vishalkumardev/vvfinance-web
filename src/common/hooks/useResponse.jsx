@@ -7,10 +7,6 @@ const useResponse = async (response) => {
     Showtoast("success", res?.message);
   }
 
-  if (res.statusCode != 200 && res.statusCode != 201) {
-    Showtoast("error", res?.message);
-  }
-
   const getMessage = (messages) => {
     let message = "";
     if (typeof messages === "string") {
@@ -22,10 +18,14 @@ const useResponse = async (response) => {
     return message;
   };
 
+  if (res.statusCode != 200 && res.statusCode != 201) {
+    Showtoast("error", getMessage(res?.errors?.length > 0 || res?.message));
+  }
+
   return {
     data: res?.data,
     success: res?.success,
-    message: getMessage(res?.message),
+    message: getMessage(res?.message ?? res?.errors),
   };
 };
 

@@ -11,6 +11,7 @@ import { CircleCheck, EyeIcon, Trash, XCircle } from "lucide-react";
 // "../api/courseApi";
 import Status from "@/common/components/Status";
 import { useSelector } from "react-redux";
+import { setFilter } from "../../loan/slice/loanSlice";
 
 function ClientTable({ clients, isLoading }) {
   const { role } = useSelector((state) => state.auth);
@@ -38,8 +39,9 @@ function ClientTable({ clients, isLoading }) {
     {
       label: "View",
       icon: <EyeIcon />,
-      //   onClick: (courseId) =>
-      //     navigate(`/${role}/dashboard/course/view/${courseId}`),
+      onClick: (courseId) => {
+        navigate(`/dashboard/loans/`);
+      },
       className: "",
     },
     {
@@ -72,7 +74,7 @@ function ClientTable({ clients, isLoading }) {
       </TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
-        <Action actions={actions} id={row?.courseId} />
+        <Action actions={actions} id={row?.key} />
       </TableCell>
     </TableRow>
   );
