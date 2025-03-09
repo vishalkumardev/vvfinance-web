@@ -24,7 +24,7 @@ function Pagination({ totalPages, currentPage, handlePageChange }) {
             </PaginationItem>
 
             {/* Dynamic Page Numbers */}
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            {Array.from({ length: totalPages > 5 ? 5 : totalPages }, (_, i) => i + 1).map((page) => (
               <PaginationItem key={page}>
                 <PaginationLink
                   onClick={() => handlePageChange(page)}
