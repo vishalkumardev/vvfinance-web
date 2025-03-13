@@ -34,13 +34,13 @@ function ViewTable({ searchData, isLoading }) {
   const tableRow = ({ row, index }) => (
     <TableRow hover role="checkbox" tabIndex={-1} key={row?.loanId}>
       <TableCell>{index + 1}</TableCell>
-      <TableCell>{row?.agents?.name}</TableCell>
-      <TableCell>{row?.agents?.phone}</TableCell>
+      <TableCell>{row?.name}</TableCell>
+      <TableCell>{row?.phone}</TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
         <Link
           className=""
-          to={`https://www.google.com/maps?q=${row?.location?.coordinates[1]},${row?.location?.coordinates[0]}`}
+          to={`https://www.google.com/maps?q=${row?.searchVehicle?.location?.coordinates[0]},${row?.searchVehicle?.location?.coordinates[1]}`}
           target="_blank"
         >
           <EyeIcon className="mx-auto" />

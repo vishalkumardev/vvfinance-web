@@ -1,17 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useSearchListsQuery } from "../../features/loan/api/loanApi";
-import { setPage, setSearch } from "../../features/loan/slice/loanSlice";
-import { useLoanParams } from "../../features/loan/hooks/useLoanParams";
+import { useSearchListsQuery } from "../../features/reports/api/reportApi";
+import { setPage, setSearch } from "../../features/reports/slice/reportSlice";
 import RecordTable from "../../features/reports/components/Table";
 import Pagination from "@/common/components/Pagination";
 import TopHeader from "../../common/components/TopHeader";
-import { useNavigate } from "react-router-dom";
+import Filter from "../../features/reports/components/Filter";
+import { useReportParams } from "../../features/reports/hooks/useReportParams";
+import useExportToExcel from "../../common/hooks/useExport";
 
-const Loans = () => {
+const Reports = () => {
   const dispatch = useDispatch();
-  const { search, filter, sort, page } = useLoanParams();
-  const navigate = useNavigate();
+  const { search, filter, sort, page } = useReportParams();
+  const [isFilterOpen, setisFilterOpen] = useState(false);
 
   const { data: loanData, isLoading } = useSearchListsQuery({
     search,
@@ -27,11 +28,18 @@ const Loans = () => {
   return (
     <div className="px-5">
       <TopHeader
-        title="Search List"
+        title="Reports"
         placeholder="Search Loans..."
         description="You can view search list and details here"
         handleSearch={(query) => dispatch(setSearch(query))}
+        btn2Visible={true}
+        btn2Text="Add Filter"
+        btn2Fn={() => {
+          setisFilterOpen(true);
+        }}
       />
+
+      <Filter isOpen={isFilterOpen} onClose={() => setisFilterOpen(false)} />
 
       <RecordTable searchData={searchData} isLoading={isLoading} />
       <Pagination
@@ -43,4 +51,4 @@ const Loans = () => {
   );
 };
 
-export default Loans;
+export default Reports;

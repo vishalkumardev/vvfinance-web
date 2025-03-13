@@ -44,17 +44,23 @@ const LoanCard = ({ loan }) => {
               label: "Coordinator",
               value: `${loan?.coordinator_name} (${loan?.coordinater_mobile_no})`,
             },
-          ].map((item, index) => (
-            <div
-              key={index}
-              className={`p-2 rounded-md ${
-                index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"
-              }`}
-            >
-              <p className="text-sm text-gray-600">{item.label}</p>
-              <p className="text-md font-medium text-gray-900">{item.value}</p>
-            </div>
-          ))}
+          ].map((item, index) => {
+            return (
+              <div
+                key={index}
+                className={`p-2 rounded-md ${
+                  index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"
+                }`}
+              >
+                <p className="text-sm text-gray-600">{item.label}</p>
+                <p className="text-md font-medium text-gray-900">
+                  {item.value?.includes(null) || item?.value == null
+                    ? "N/A"
+                    : item?.value}
+                </p>
+              </div>
+            );
+          })}
         </div>
       </CardContent>
     </Card>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useGetLoansQuery } from "../../features/loan/api/loanApi";
 import { setPage, setSearch } from "../../features/loan/slice/loanSlice";
@@ -7,11 +7,13 @@ import ClientTable from "../../features/loan/components/Table";
 import Pagination from "@/common/components/Pagination";
 import TopHeader from "../../common/components/TopHeader";
 import { useNavigate } from "react-router-dom";
+import Filter from "../../features/loan/components/Filter";
 
 const Loans = () => {
   const dispatch = useDispatch();
   const { search, filter, sort, page } = useLoanParams();
   const navigate = useNavigate();
+  const [isFilterOpen, setisFilterOpen] = useState(false);
 
   const { data: loanData, isLoading } = useGetLoansQuery({
     search,
@@ -32,9 +34,15 @@ const Loans = () => {
         btn1Text="Upload Data"
         btn1Visible={true}
         btn1Fn={() => navigate("/dashboard/loans/add")}
+        btn2Visible={true}
         btn2Text="Add Filter"
+        btn2Fn={() => {
+          setisFilterOpen(true);
+        }}
         handleSearch={(query) => dispatch(setSearch(query))}
       />
+
+      <Filter isOpen={isFilterOpen} onClose={() => setisFilterOpen(false)} />
 
       <ClientTable loans={loans} isLoading={isLoading} />
       <Pagination

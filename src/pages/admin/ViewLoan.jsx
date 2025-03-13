@@ -15,7 +15,7 @@ const ViewLoan = () => {
   }, []);
 
   const loanData = data?.data;
-  const searchVehicles = data?.data?.searchVehicles;
+  const searchVehicles = data?.data?.user;
 
   return (
     <div className="container mx-auto p-5">

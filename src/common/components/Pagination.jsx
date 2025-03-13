@@ -7,54 +7,78 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/common/components/ui/pagination";
-function Pagination({ totalPages, currentPage, handlePageChange }) {
-  return (
-    <div>
-      {totalPages >= 2 && (
-        <PageManager className="mt-16">
-          <PaginationContent>
-            {/* Previous Button */}
-            <PaginationItem>
-              <PaginationPrevious
-                onClick={() =>
-                  handlePageChange(currentPage > 1 ? currentPage - 1 : 1)
-                }
-                disabled={currentPage === totalPages}
-              />
-            </PaginationItem>
 
-            {/* Dynamic Page Numbers */}
-            {Array.from({ length: totalPages > 5 ? 5 : totalPages }, (_, i) => i + 1).map((page) => (
-              <PaginationItem key={page}>
-                <PaginationLink
-                  onClick={() => handlePageChange(page)}
-                  className={
-                    currentPage === page
-                      ? "font-bold bg-primary text-white rounded hover:cursor-pointer" // Active style
-                      : "hover:cursor-pointer"
-                  }
-                >
-                  {page}
+function Pagination({ totalPages, currentPage, handlePageChange }) {
+  if (totalPages < 2) return null; // Hide pagination if only 1 page exists
+
+  // Determine the start and end of the visible page range
+  const startPage = Math.max(currentPage - 2, 1);
+  const endPage = Math.min(startPage + 4, totalPages);
+
+  return (
+    <div className="flex justify-center mt-8">
+      <PageManager>
+        <PaginationContent>
+          {/* Previous Button */}
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+            />
+          </PaginationItem>
+
+          {/* First Page & Ellipsis */}
+          {startPage > 1 && (
+            <>
+              <PaginationItem>
+                <PaginationLink onClick={() => handlePageChange(1)}>
+                  1
                 </PaginationLink>
               </PaginationItem>
-            ))}
+              {startPage > 2 && <PaginationEllipsis />}
+            </>
+          )}
 
-            {totalPages > 5 && <PaginationEllipsis />}
-
-            {/* Next Button */}
-            <PaginationItem>
-              <PaginationNext
-                onClick={() =>
-                  handlePageChange(
-                    currentPage < totalPages ? currentPage + 1 : totalPages
-                  )
+          {/* Dynamic Page Numbers */}
+          {Array.from(
+            { length: endPage - startPage + 1 },
+            (_, i) => startPage + i
+          ).map((page) => (
+            <PaginationItem key={page}>
+              <PaginationLink
+                onClick={() => handlePageChange(page)}
+                className={
+                  currentPage === page
+                    ? "font-bold bg-primary text-white rounded"
+                    : ""
                 }
-                disabled={currentPage === totalPages}
-              />
+              >
+                {page}
+              </PaginationLink>
             </PaginationItem>
-          </PaginationContent>
-        </PageManager>
-      )}
+          ))}
+
+          {/* Last Page & Ellipsis */}
+          {endPage < totalPages && (
+            <>
+              {endPage < totalPages - 1 && <PaginationEllipsis />}
+              <PaginationItem>
+                <PaginationLink onClick={() => handlePageChange(totalPages)}>
+                  {totalPages}
+                </PaginationLink>
+              </PaginationItem>
+            </>
+          )}
+
+          {/* Next Button */}
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </PageManager>
     </div>
   );
 }

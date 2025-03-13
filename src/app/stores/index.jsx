@@ -13,6 +13,8 @@ import clientSlice from "../../features/client/slice/clientSlice";
 import loanSlice from "../../features/loan/slice/loanSlice";
 import teleSlice from "../../features/telecall/slice/teleSlice";
 import userSlice from "../../features/auth/slice/userSlice";
+import reportSlice from "../../features/reports/slice/reportSlice";
+import { reportApi } from "../../features/reports/api/reportApi";
 
 export const store = configureStore({
   reducer: {
@@ -21,11 +23,13 @@ export const store = configureStore({
     loan: loanSlice,
     telecall: teleSlice,
     user: userSlice,
+    reports: reportSlice,
     [authApi.reducerPath]: authApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [clientApi.reducerPath]: clientApi.reducer,
     [loanApi.reducerPath]: loanApi.reducer,
     [telecallApi.reducerPath]: telecallApi.reducer,
+    [reportApi.reducerPath]: reportApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
@@ -33,6 +37,7 @@ export const store = configureStore({
       userApi.middleware,
       clientApi.middleware,
       loanApi.middleware,
-      telecallApi.middleware
+      telecallApi.middleware,
+      reportApi.middleware
     ), // Add the API middleware
 });

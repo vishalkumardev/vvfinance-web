@@ -13,7 +13,7 @@ function Dropdown({ className, options, onChange, placeholder, ...props }) {
   return (
     <div className="my-2 w-full">
       <Label htmlFor={props?.id}>{props?.label}</Label>
-      <Select onValueChange={onChange}>
+      <Select onValueChange={onChange} value={props?.value}>
         <SelectTrigger>
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>

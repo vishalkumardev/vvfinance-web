@@ -13,6 +13,7 @@ function ViewTable({ searchData, isLoading }) {
     () => [
       { name: "Serial No." },
       { name: "Agent Name" },
+      { name: "Registration No Name" },
       { name: "Agent Phone No." },
       { name: "Time" },
       { name: "Action" },
@@ -20,25 +21,16 @@ function ViewTable({ searchData, isLoading }) {
     []
   );
 
-  const actions = [
-    {
-      label: "View Loan",
-      icon: <EyeIcon />,
-      onClick: (loanId) =>
-        redirect("https://maps.app.goo.gl/N99T1M2tBK6rgLhq8"),
-      className: "text-gray-600 hover:text-gray-500",
-    },
-  ];
-
   // Table row component
   const tableRow = ({ row, index }) => (
     <TableRow hover role="checkbox" tabIndex={-1} key={row?.loanId}>
       <TableCell>{index + 1}</TableCell>
-      <TableCell>{row?.agents?.name}</TableCell>
-      <TableCell>{row?.agents?.phone}</TableCell>
+      <TableCell>{row?.loan?.registration_no}</TableCell>
+      <TableCell>{row?.agent?.name}</TableCell>
+      <TableCell>{row?.agent?.phone}</TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>
       <TableCell>
-        <Link className="" to={`/dashboard/loans/view/${row.loanId}`}>
+        <Link className="" to={`/dashboard/loans/view/${row?.loan?.loanId}`}>
           <EyeIcon className="mx-auto" />
         </Link>
       </TableCell>

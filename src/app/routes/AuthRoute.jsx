@@ -20,9 +20,7 @@ const AddTelecall = React.lazy(() => import("../../pages/admin/AddTeleCall"));
 const AddUser = React.lazy(() => import("../../pages/admin/AddUser"));
 const AddClient = React.lazy(() => import("../../pages/admin/AddClient"));
 const ViewLoan = React.lazy(() => import("../../pages/admin/ViewLoan"));
-const SearchVehicle = React.lazy(() =>
-  import("../../pages/admin/SearchVehicle")
-);
+const Reports = React.lazy(() => import("../../pages/admin/Reports"));
 
 // Wrap with suspense
 
@@ -40,7 +38,7 @@ const AddTelecallSuspense = useSuspense(AddTelecall);
 const AddUserSuspense = useSuspense(AddUser);
 const AddClientSuspense = useSuspense(AddClient);
 const ViewLoanSuspense = useSuspense(ViewLoan);
-const SearchVehicleSuspense = useSuspense(SearchVehicle);
+const ReportsSuspense = useSuspense(Reports);
 
 export default function AuthRoute(isLoggedIn, role) {
   const routeObject = {
@@ -104,7 +102,7 @@ export default function AuthRoute(isLoggedIn, role) {
                   },
                   {
                     path: "/dashboard/reports",
-                    element: <SearchVehicleSuspense />,
+                    element: <Reports />,
                   },
                 ],
               }),

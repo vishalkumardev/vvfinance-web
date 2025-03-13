@@ -58,6 +58,20 @@ export const userApi = createApi({
       query: (userId) => `/user/${userId}`,
       providesTags: ["userById"], // Mark this query as providing the "userById" tag
     }),
+
+    getAllAgents: builder.query({
+      query: (body) => ({
+        url: `/user/get/all`,
+        method: "POST",
+        data: {
+          ...body,
+          filter: {
+            role: "agents",
+          },
+        },
+      }),
+      providesTags: ["Users"], // Mark this query as providing the "Users" tag
+    }),
   }),
 });
 
@@ -67,4 +81,5 @@ export const {
   useUpdateuserMutation,
   useDeleteuserMutation,
   useToggleUserMutation,
+  useGetAllAgentsQuery,
 } = userApi;

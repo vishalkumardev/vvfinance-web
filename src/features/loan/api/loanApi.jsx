@@ -63,15 +63,6 @@ export const loanApi = createApi({
       }),
       providesTags: ["LoanById"], // Mark this query as providing the "LoanById" tag
     }),
-
-    searchLists: builder.query({
-      query: (data) => ({
-        url: `/loan/search/all`,
-        method: "POST",
-        body: { data },
-      }),
-      providesTags: ["SearchLists"], // Mark this query as providing the "SearchLists" tag
-    }),
   }),
 });
 
@@ -81,5 +72,4 @@ export const {
   useDeleteLoanMutation,
   useUpdateLoanMutation,
   useGetLoanByIdMutation,
-  useSearchListsQuery,
 } = loanApi;
