@@ -5,6 +5,7 @@ import {
   ChartNoAxesCombined,
   FileIcon,
   GalleryVerticalEnd,
+  History,
   Home,
   MonitorCog,
   Phone,
@@ -54,6 +55,12 @@ const adminMenu = [
     label: "Users",
     path: "/dashboard/users",
     icon: <Users size={24} />,
+  },
+  {
+    id: 7,
+    label: "Manage Data",
+    path: "/dashboard/manage-data",
+    icon: <History size={24} />,
   },
 ];
 

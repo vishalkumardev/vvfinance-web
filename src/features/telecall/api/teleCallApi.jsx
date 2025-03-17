@@ -59,6 +59,14 @@ export const telecallApi = createApi({
       query: (telecallId) => `/telecall/${telecallId}`,
       providesTags: ["TellecallById"], // Mark this query as providing the "TellecallById" tag
     }),
+
+    deleteAllTelecallData: builder.mutation({
+      query: () => ({
+        url: "/telecall/delete/all",
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Telecall", "TellecallById"],
+    }),
   }),
 });
 
@@ -68,4 +76,5 @@ export const {
   useDeleteTellecallMutation,
   useUpdateTellecallMutation,
   useGetTellecallByIdQuery,
+  useDeleteAllTelecallDataMutation,
 } = telecallApi;

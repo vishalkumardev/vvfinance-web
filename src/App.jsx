@@ -1,13 +1,13 @@
 import { ThemeProvider } from "./app/providers/themeprovider";
-import Route from "./app/routes/Route";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AppRoute from "./app/routes/Route";
 
 function App() {
   return (
     <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
       <ToastContainer />
-      <Route />
+      <AppRoute />
     </ThemeProvider>
   );
 }

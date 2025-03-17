@@ -63,6 +63,14 @@ export const loanApi = createApi({
       }),
       providesTags: ["LoanById"], // Mark this query as providing the "LoanById" tag
     }),
+
+    deleteAllData: builder.mutation({
+      query: () => ({
+        url: "/loan/delete/all",
+        method: "DELETE",
+      }),
+      invalidatesTags: ["Loans", "LoanById"],
+    }),
   }),
 });
 
@@ -72,4 +80,5 @@ export const {
   useDeleteLoanMutation,
   useUpdateLoanMutation,
   useGetLoanByIdMutation,
+  useDeleteAllDataMutation,
 } = loanApi;

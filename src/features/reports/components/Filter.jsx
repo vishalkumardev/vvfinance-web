@@ -46,8 +46,12 @@ function Filter({ isOpen, onClose }) {
           filter.registration_no = values.registration_no;
         if (values.userId) filter.userId = values.userId;
         if (values.client) filter.client = values.client;
-        if (values.startDate) filter.startDate = values.startDate;
-        if (values.endDate) filter.endDate = values.endDate;
+        if (values.startDate)
+          filter.startDate = new Date(values.startDate)?.toISOString();
+        if (values.endDate)
+          filter.endDate = new Date(
+            new Date(values?.endDate)?.setHours(23, 59, 59, 999)
+          ).toISOString();
         dispatch(setFilter(filter));
         onClose();
       } catch (error) {
@@ -114,6 +118,28 @@ function Filter({ isOpen, onClose }) {
           options={agents}
           errors={errors.userId}
           touched={touched.userId}
+        />
+
+        <TextInput
+          type="date"
+          name="startDate"
+          label="Start Date"
+          value={values.startDate}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={errors.startDate}
+          touched={touched.startDate}
+        />
+
+        <TextInput
+          type="date"
+          name="endDate"
+          label="End Date"
+          value={values.endDate}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          errors={errors.endDate}
+          touched={touched.endDate}
         />
 
         <Button

@@ -12,8 +12,8 @@ function ViewTable({ searchData, isLoading }) {
   const tableHeaders = useMemo(
     () => [
       { name: "Serial No." },
+      { name: "Registration No" },
       { name: "Agent Name" },
-      { name: "Registration No Name" },
       { name: "Agent Phone No." },
       { name: "Time" },
       { name: "Action" },
@@ -25,7 +25,7 @@ function ViewTable({ searchData, isLoading }) {
   const tableRow = ({ row, index }) => (
     <TableRow hover role="checkbox" tabIndex={-1} key={row?.loanId}>
       <TableCell>{index + 1}</TableCell>
-      <TableCell>{row?.loan?.registration_no}</TableCell>
+      <TableCell>{row?.loan?.registration_no ?? "N/A"}</TableCell>
       <TableCell>{row?.agent?.name}</TableCell>
       <TableCell>{row?.agent?.phone}</TableCell>
       <TableCell>{formateDate(row?.createdAt)}</TableCell>

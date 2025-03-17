@@ -6,6 +6,7 @@ const initialState = {
   sort: "default",
   page: 1,
   totalPages: 1,
+  pageSize: 15,
 };
 
 const reportSlice = createSlice({
@@ -27,10 +28,19 @@ const reportSlice = createSlice({
     setTotalPages(state, action) {
       state.totalPages = action.payload;
     },
+    setPageSize(state, action) {
+      state.pageSize = action.payload;
+    },
   },
 });
 
-export const { setSearch, setFilter, setSort, setPage, setTotalPages } =
-  reportSlice.actions;
+export const {
+  setSearch,
+  setFilter,
+  setSort,
+  setPage,
+  setTotalPages,
+  setPageSize,
+} = reportSlice.actions;
 
 export default reportSlice.reducer;
