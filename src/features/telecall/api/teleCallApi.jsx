@@ -61,9 +61,10 @@ export const telecallApi = createApi({
     }),
 
     deleteAllTelecallData: builder.mutation({
-      query: () => ({
+      query: (data) => ({
         url: "/telecall/delete/all",
         method: "DELETE",
+        body: data,
       }),
       invalidatesTags: ["Telecall", "TellecallById"],
     }),

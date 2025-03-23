@@ -78,7 +78,7 @@ const Login = () => {
             touched={touched.password}
           />
 
-          <Link to="/user/forgot" target="" className="flex justify-end my-4">
+          <Link to="/forgot" target="" className="flex justify-end my-4">
             <Label htmlFor="email">Forgot Password ?</Label>
           </Link>
 

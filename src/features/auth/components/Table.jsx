@@ -4,12 +4,14 @@ import Action from "@/common/components/Action";
 import Tables from "@/common/components/core/Table";
 import formateDate from "@/common/hooks/formateDate";
 import { useDeleteuserMutation, useToggleUserMutation } from "../api/userApi";
-import { Trash } from "lucide-react";
+import { EyeIcon, Trash } from "lucide-react";
 import { ExclamationTriangleIcon } from "@radix-ui/react-icons";
+import { useNavigate } from "react-router-dom";
 
 function CourseTable({ users, isLoading }) {
   const [deleteuser] = useDeleteuserMutation();
   const [toggleUser] = useToggleUserMutation();
+  const navigate = useNavigate();
 
   // Table headers
   const tableHeaders = useMemo(
@@ -17,6 +19,7 @@ function CourseTable({ users, isLoading }) {
       { name: "Serial No.", id: "serial" },
       { name: "Name", id: "name" },
       { name: "Email", id: "email" },
+      { name: "Phone", id: "phone" },
       { name: "Role", id: "role" },
       { name: "Status", id: "active" },
       { name: "Created At", id: "createdAt" },
@@ -27,7 +30,15 @@ function CourseTable({ users, isLoading }) {
 
   const actions = [
     {
-      label: "Change Status",
+      label: "View",
+      icon: <EyeIcon />,
+      onClick: (userId) => {
+        navigate(`/dashboard/users/profile/${userId}`);
+      },
+      className: "text-gray-600 hover:text-red-500",
+    },
+    {
+      label: "Active/Inactive",
       icon: <ExclamationTriangleIcon />,
       onClick: toggleUser,
       className: "text-gray-600 hover:text-red-500",
@@ -46,6 +57,7 @@ function CourseTable({ users, isLoading }) {
       <TableCell>{index + 1}</TableCell>
       <TableCell>{row?.name}</TableCell>
       <TableCell>{row?.email}</TableCell>
+      <TableCell>{row?.phone}</TableCell>
       <TableCell className="uppercase">{row?.role}</TableCell>
       <TableCell className="uppercase">
         {row?.active ? "Active" : "Inactive"}

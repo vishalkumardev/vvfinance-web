@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 
 // Admin Files
 const AdminDashboard = React.lazy(() => import("../../pages/admin/Dashboard"));
+const UserProfile = React.lazy(() => import("../../pages/admin/UserProfile"));
 const Clients = React.lazy(() => import("../../pages/admin/Clients"));
 const Loans = React.lazy(() => import("../../pages/admin/Loans"));
 const Telecall = React.lazy(() => import("../../pages/admin/Telecall"));
@@ -42,6 +43,7 @@ const LoginSuspense = useSuspense(Login);
 const ForgotSuspense = useSuspense(Forgot);
 const PasswordResetSuspense = useSuspense(PasswordReset);
 const ManageDataSuspense = useSuspense(ManageData);
+const ProfileSuspense = useSuspense(UserProfile);
 
 function AppRoute() {
   const { authorized, role } = useSelector((state) => state.auth);
@@ -56,9 +58,17 @@ function AppRoute() {
               element={<AdminDashboardSuspense />}
             />
             <Route path="/dashboard/clients" element={<ClientsSuspense />} />
+            <Route
+              path="/dashboard/clients/edit/:clientId"
+              element={<AddClientSuspense />}
+            />
             <Route path="/dashboard/loans" element={<LoansSuspense />} />
             <Route path="/dashboard/telecall" element={<TelecallSuspense />} />
             <Route path="/dashboard/users" element={<UserSuspense />} />
+            <Route
+              path="/dashboard/users/profile/:id"
+              element={<ProfileSuspense />}
+            />
             <Route path="/dashboard/loans/add" element={<AddLoanSuspense />} />
             <Route
               path="/dashboard/telecall/add"

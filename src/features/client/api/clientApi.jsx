@@ -41,7 +41,7 @@ export const clientApi = createApi({
     updateClient: builder.mutation({
       query: (data) => ({
         url: `/client`,
-        method: "PUT",
+        method: "PATCH",
         body: data,
       }),
       invalidatesTags: ["Clients"], // Invalidate the "Clients" tag to refetch data

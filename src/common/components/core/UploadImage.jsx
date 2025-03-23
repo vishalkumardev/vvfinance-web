@@ -4,7 +4,7 @@ import Errortext from "./ErrorText";
 import { Button } from "../ui/button";
 import { toast } from "react-toastify";
 
-function UplodProfile(props) {
+function UploadImage(props) {
   const { Url, setUrl, message } = props;
 
   const onDrop = useCallback(
@@ -31,13 +31,13 @@ function UplodProfile(props) {
 
       <div
         {...getRootProps()}
-        className="dropzone-area  rounded-full  border-dashed border border-gray-400 w-36 h-36  flex justify-center items-center my-2 "
+        className="dropzone-area rounded-md  border-dashed border border-gray-400 h-60 flex justify-center items-center my-2 "
       >
         <input {...getInputProps()} />
         <div className={`dropzone-inner ${isDragActive ? "active" : ""}`}>
           {Url ? (
             <img
-              className="object-contain w-36 h-36 rounded-full"
+              className="object-cover w-fit h-56"
               src={typeof Url == "string" ? Url : URL.createObjectURL(Url)}
             />
           ) : (
@@ -56,4 +56,4 @@ function UplodProfile(props) {
   );
 }
 
-export default UplodProfile;
+export default UploadImage;
