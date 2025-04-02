@@ -2,6 +2,7 @@ import {
   Album,
   Bell,
   BrainCog,
+  Car,
   ChartNoAxesCombined,
   FileIcon,
   GalleryVerticalEnd,
@@ -30,6 +31,12 @@ const adminMenu = [
     id: 3,
     label: "Loans",
     path: "/dashboard/loans",
+    icon: <Car size={24} />,
+  },
+  {
+    id: 10,
+    label: "File Managment",
+    path: "/dashboard/files",
     icon: <FileIcon size={24} />,
   },
   {

@@ -1,24 +1,10 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { constant } from "../../../app/config/constant";
-import useResponse from "../../../common/hooks/useResponse";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { login } from "../slice/authSlice";
+import baseQueryWithAuth from "../../../app/utils/baseQuery";
 
 export const authApi = createApi({
   reducerPath: "authApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: constant?.baseUrl,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("userToken");
-
-      if (token) {
-        headers.set("userorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-    responseHandler: async (response) => {
-      return useResponse(response);
-    },
-  }),
+  baseQuery: baseQueryWithAuth,
   endpoints: (builder) => ({
     login: builder.mutation({
       query: (credentials) => ({

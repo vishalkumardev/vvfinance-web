@@ -8,6 +8,7 @@ const AdminDashboard = React.lazy(() => import("../../pages/admin/Dashboard"));
 const UserProfile = React.lazy(() => import("../../pages/admin/UserProfile"));
 const Clients = React.lazy(() => import("../../pages/admin/Clients"));
 const Loans = React.lazy(() => import("../../pages/admin/Loans"));
+const File = React.lazy(() => import("../../pages/admin/File"));
 const Telecall = React.lazy(() => import("../../pages/admin/Telecall"));
 const User = React.lazy(() => import("../../pages/admin/User"));
 const AddLoan = React.lazy(() => import("../../pages/admin/AddLoan"));
@@ -44,6 +45,7 @@ const ForgotSuspense = useSuspense(Forgot);
 const PasswordResetSuspense = useSuspense(PasswordReset);
 const ManageDataSuspense = useSuspense(ManageData);
 const ProfileSuspense = useSuspense(UserProfile);
+const FilesSuspense = useSuspense(File);
 
 function AppRoute() {
   const { authorized, role } = useSelector((state) => state.auth);
@@ -62,6 +64,7 @@ function AppRoute() {
               path="/dashboard/clients/edit/:clientId"
               element={<AddClientSuspense />}
             />
+            <Route path="/dashboard/files" element={<FilesSuspense />} />
             <Route path="/dashboard/loans" element={<LoansSuspense />} />
             <Route path="/dashboard/telecall" element={<TelecallSuspense />} />
             <Route path="/dashboard/users" element={<UserSuspense />} />
@@ -92,7 +95,7 @@ function AppRoute() {
           </Route>
         ) : (
           <>
-            <Route path="/" element={<LoginSuspense />} />
+            <Route index path="/" element={<LoginSuspense />} />
             <Route path="/forgot" element={<ForgotSuspense />} />
             <Route path="/reset/:token" element={<PasswordResetSuspense />} />
             <Route path="*" element={<NotFoundPageSuspense />} />

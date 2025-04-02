@@ -1,23 +1,9 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import useResponse from "../../../common/hooks/useResponse";
-import { constant } from "../../../app/config/constant";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import baseQueryWithAuth from "../../../app/utils/baseQuery";
 
 export const loanApi = createApi({
   reducerPath: "loanApi",
-  baseQuery: fetchBaseQuery({
-    baseUrl: constant?.baseUrl,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem("userToken");
-
-      if (token) {
-        headers.set("Authorization", `Bearer ${token}`);
-      }
-      return headers;
-    },
-    responseHandler: async (response) => {
-      return useResponse(response);
-    },
-  }),
+  baseQuery: baseQueryWithAuth,
   tagTypes: ["Loans"], // Add tag types for caching and invalidation
   endpoints: (builder) => ({
     getLoans: builder.query({
