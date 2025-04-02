@@ -16,7 +16,7 @@ import userSlice from "../../features/auth/slice/userSlice";
 import reportSlice from "../../features/reports/slice/reportSlice";
 import fileSlice from "../../features/file/slice/fileSlice";
 import { reportApi } from "../../features/reports/api/reportApi";
-import { fileApi } from "../../features/file/api/fileApi";
+import { fileApi } from "../../features/file/api/FileApi";
 
 export const store = configureStore({
   reducer: {
