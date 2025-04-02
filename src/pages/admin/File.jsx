@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useGetFilesQuery } from "../../features/file/api/fileApi";
+import { useGetFilesQuery } from "../../features/file/api/FileApi";
 import { setPage, setSearch } from "../../features/file/slice/fileSlice";
 import { useFileParams } from "../../features/file/hooks/useFileParams";
 import FileTable from "../../features/file/components/Table";
